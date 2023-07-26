@@ -32,4 +32,4 @@ require('lazy').setup({
 })
 vim.cmd[[colorscheme tokyonight-night]]
 require("treesitter") 
--- ^^^^^^ this has to be here, because you cant have it before you call it in requirelazy
+-- ^^^^^^ this has to be here, because you cant have it before you call it in requirelazy --
