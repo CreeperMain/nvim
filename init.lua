@@ -1,5 +1,6 @@
-require("remaps")
-require("packagemanager")
+require("remaps") --key maps 
+require("packagemanager") --boostraping lazy
+
 require('lazy').setup({
 -- color scheme
   {
@@ -14,6 +15,16 @@ require('lazy').setup({
 -- or                              , branch = '0.1.x',
       dependencies = { 'nvim-lua/plenary.nvim' },
     },
-
+-- tree sitter
+    {
+      -- Highlight, edit, and navigate code
+      'nvim-treesitter/nvim-treesitter',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+      },
+      build = ':TSUpdate',
+    },
+    'nvim-treesitter/playground',
 })
 vim.cmd[[colorscheme tokyonight-night]]
+require("treesitter") -- this has to be here, because you cant have it before you call it in requirelazy
