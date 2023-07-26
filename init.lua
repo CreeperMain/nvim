@@ -26,6 +26,8 @@ require('lazy').setup({
     },
     'nvim-treesitter/playground',
     'ThePrimeagen/harpoon',
+    'mbbill/undotree',
+    'tpope/vim-fugitive',
 })
 vim.cmd[[colorscheme tokyonight-night]]
 require("treesitter") -- this has to be here, because you cant have it before you call it in requirelazy
