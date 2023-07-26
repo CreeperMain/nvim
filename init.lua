@@ -28,6 +28,7 @@ require('lazy').setup({
     'ThePrimeagen/harpoon',
     'mbbill/undotree',
     'tpope/vim-fugitive',
+    'gentoo/gentoo-syntax',
 })
 vim.cmd[[colorscheme tokyonight-night]]
 require("treesitter") -- this has to be here, because you cant have it before you call it in requirelazy
