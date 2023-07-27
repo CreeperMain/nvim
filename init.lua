@@ -26,7 +26,7 @@ require('lazy').setup({
     },
     'nvim-treesitter/playground', --mozhda ne trebit
     'ThePrimeagen/harpoon',
-    'mbbill/undotree',
+    'mbbill/undotree', --look into this
     'tpope/vim-fugitive',
     'gentoo/gentoo-syntax',
     --lsp stuff
@@ -55,15 +55,9 @@ require('lazy').setup({
       -- Set lualine as statusline
       'nvim-lualine/lualine.nvim',
       -- See `:help lualine.txt`
-      opts = {
-        options = {
-          icons_enabled = true,
-          theme = 'ayu_mirage',
-          component_separators = '|',
-          section_separators = '',
-        },
-      },
     },
+    --'nvim-tree/nvim-tree.lua', --configure this
+    'nvim-tree/nvim-web-devicons',
 })
 vim.cmd[[colorscheme tokyonight-night]]
 require("treesitter") 
