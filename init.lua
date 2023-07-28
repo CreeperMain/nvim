@@ -1,6 +1,6 @@
 require("remaps") --key maps 
 require("packagemanager") --boostraping lazy
-
+require("set")
 require('lazy').setup({
 -- color scheme
   {
@@ -58,7 +58,33 @@ require('lazy').setup({
     },
     --'nvim-tree/nvim-tree.lua', --configure this
     'nvim-tree/nvim-web-devicons',
+--this is for which key which really helps with the keybindings
+    {
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  init = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 300
+  end,
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  },
+},
+--this is the dashboard stuff
+{
+  'glepnir/dashboard-nvim',
+  event = 'VimEnter',
+  config = function()
+    require('dashboard').setup {
+      -- config
+    }
+  end,
+  dependencies = { {'nvim-tree/nvim-web-devicons'}}
+},
 })
 vim.cmd[[colorscheme tokyonight-night]]
-require("treesitter") 
+require("treesitter")
+--require("dashboard")
 -- ^^^^^^ this has to be here, because you cant have it before you call it in requirelazy --
