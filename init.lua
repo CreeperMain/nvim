@@ -56,7 +56,7 @@ require('lazy').setup({
       'nvim-lualine/lualine.nvim',
       -- See `:help lualine.txt`
     },
-    --'nvim-tree/nvim-tree.lua', --configure this
+    'nvim-tree/nvim-tree.lua', --configure this
     'nvim-tree/nvim-web-devicons',
 --this is for which key which really helps with the keybindings
     {
@@ -83,6 +83,16 @@ require('lazy').setup({
   end,
   dependencies = { {'nvim-tree/nvim-web-devicons'}}
 },
+{
+  "ahmedkhalf/project.nvim",
+  config = function()
+    require("project_nvim").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  end
+}
 })
 vim.cmd[[colorscheme tokyonight-night]]
 require("treesitter")
