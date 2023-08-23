@@ -57,7 +57,6 @@ require('lazy').setup({
       -- See `:help lualine.txt`
     },
     'nvim-tree/nvim-tree.lua', --configure this
-    'nvim-tree/nvim-web-devicons',
 --this is for which key which really helps with the keybindings
     {
   "folke/which-key.nvim",
