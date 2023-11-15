@@ -31,7 +31,7 @@ require('lazy').setup({
 },
 -- lsp stuff
 {
-	'VonHeikemen/lsp-zero.nvim', 
+	'VonHeikemen/lsp-zero.nvim',
 	branch = 'v3.x',
 	dependencies = {
 		--lsp support
@@ -42,7 +42,9 @@ require('lazy').setup({
 		--autocompletion
 		{'hrsh7th/cmp-nvim-lsp'},
 		{'hrsh7th/nvim-cmp'},
+        --snippets
 		{'L3MON4D3/LuaSnip'},
+        {'rafamadriz/friendly-snippets'},
 			}
 },
 -- file nav
