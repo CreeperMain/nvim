@@ -22,8 +22,8 @@ require('lazy').setup({
     opts = {},
   },
 -- tree sitter bit
-{	
-	"nvim-treesitter/nvim-treesitter", 
+{
+	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 },
 {
@@ -39,9 +39,12 @@ require('lazy').setup({
 			--mason stuff
 			{'williamboman/mason.nvim'},
 	 		{'williamboman/mason-lspconfig.nvim'},
+            {'jay-babu/mason-nvim-dap.nvim'},
 		--autocompletion
 		{'hrsh7th/cmp-nvim-lsp'},
 		{'hrsh7th/nvim-cmp'},
+		{'hrsh7th/cmp-path'},
+		{'hrsh7th/cmp-buffer'},
         --snippets
 		{'L3MON4D3/LuaSnip'},
         {'rafamadriz/friendly-snippets'},
@@ -70,6 +73,49 @@ require('lazy').setup({
 -- git
   { "kdheepak/lazygit.nvim" },
   { "airblade/vim-gitgutter" },
+-- dap
+  {
+    'mfussenegger/nvim-dap',
+    config = function(_,_)
+        require("configs.keymaps")
+    end
+  },
+  { "rcarriga/nvim-dap-ui",
+  event = "VeryLazy",
+  dependencies = "mfussenegger/nvim-dap",
+  config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+          dapui.open()
+      end
+      dap.listeners.after.event_terminated["dapui_config"] = function()
+          dapui.close()
+      end
+      dap.listeners.after.event_exited["dapui_config"] = function()
+          dapui.close()
+      end
+  end
+  },
+-- auto closing brackets
+{
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+},
+{
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+},
+-- blankline indentation
+{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 --misc
 {
 	--gentoo syntax
@@ -82,5 +128,7 @@ require('lazy').setup({
 'uga-rosa/ccc.nvim',
 	--vim fugitive 
 'tpope/vim-fugitive',
+    --auto close
+'windwp/nvim-ts-autotag',
 }
 		})

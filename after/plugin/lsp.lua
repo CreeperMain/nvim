@@ -19,7 +19,8 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'html', 'lua_ls', 'clangd'},
+  -- pubo ovde redi git jazicite
+  ensure_installed = {'html', 'lua_ls', 'clangd', 'pylyzer'},
   -- ovdeka gi redish onije od mason ^^^
   handlers = {
     lsp_zero.default_setup,

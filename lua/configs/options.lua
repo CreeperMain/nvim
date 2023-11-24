@@ -18,7 +18,7 @@ local options = {
 
 	swapfile = false,
 	backup = false,
-	undodir = os.getenv("HOME") .. "/.vim/undodir",
+	undodir = os.getenv("HOME") .. "/.cache/nvim/undodir",
 	undofile =true,
 
 	termguicolors = true,
