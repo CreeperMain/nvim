@@ -12,7 +12,7 @@ local options = {
 	relativenumber = true,
 
 	incsearch = true,
-	hlsearch = false,
+	hlsearch = true,
 
 	wrap = false,
 
