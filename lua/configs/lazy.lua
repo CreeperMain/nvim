@@ -210,4 +210,36 @@ require("lazy").setup({
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
+	-- linting
+	{
+		"mfussenegger/nvim-lint",
+		event = {
+			"BufReadPre",
+			"BufNewFile",
+		},
+		config = function()
+			local lint = require("lint")
+			lint.linters_by_ft = {
+				javascript = { "eslint_d" },
+				cpp = { "cpplint" },
+				c = { "cpplint" },
+			}
+			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+			-- :h events to check for more event you can add
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				group = lint_augroup,
+				callback = function()
+					lint.try_lint()
+				end,
+			})
+			vim.keymap.set("n", "<leader>l", function()
+				lint.try_lint()
+			end, { desc = "triggers linting for the current file" })
+		end,
+	},
+	-- terminal
+	{
+		{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	},
 })
