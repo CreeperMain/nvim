@@ -75,6 +75,7 @@ require("lazy").setup({
 	{ "kdheepak/lazygit.nvim" },
 	{ "airblade/vim-gitgutter" },
 	-- dap
+	--[[
 	{
 		"mfussenegger/nvim-dap",
 		config = function(_, _)
@@ -100,6 +101,7 @@ require("lazy").setup({
 			end
 		end,
 	},
+    ]]
 	-- auto closing brackets
 	{
 		"windwp/nvim-autopairs",

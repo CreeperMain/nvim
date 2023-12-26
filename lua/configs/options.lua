@@ -12,14 +12,14 @@ local options = {
 	relativenumber = true,
 
 	incsearch = true,
-	hlsearch = true,
+	hlsearch = false,
 
 	wrap = false,
 
 	swapfile = false,
 	backup = false,
 	undodir = os.getenv("HOME") .. "/.cache/nvim/undodir",
-	undofile =true,
+	undofile = true,
 
 	termguicolors = true,
 
@@ -27,9 +27,9 @@ local options = {
 
 	updatetime = 50,
 
---	colorcolumn = "80",
+	--	colorcolumn = "80",
 }
 -- :options command for a list of names and descriptions for all vim options
 for option, value in pairs(options) do
-  vim.opt[option] = value
+	vim.opt[option] = value
 end

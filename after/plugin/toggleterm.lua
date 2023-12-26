@@ -1,6 +1,8 @@
 require("toggleterm").setup({
 	open_mapping = [[<c-n>]],
 	direction = "horizontal",
+	shade_terminals = true,
+	persist_size = true,
 	float_opts = {
 		border = "curved",
 	},
