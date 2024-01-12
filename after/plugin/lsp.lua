@@ -39,21 +39,6 @@ end)
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	-- pubo ovde redi git jazicite
-	ensure_installed = {
-		"html",
-		"emmet_language_server",
-		"emmet_ls", --html
-		"cssls",
-		"tailwindcss", --css
-		"tsserver",
-		"eslint",
-		"vtsls", -- javascript
-		"lua_ls", --lua
-		"clangd", --c&c++
-		"pyright", --python
-	},
-	-- ovdeka gi redish onije od mason ^^^
 	handlers = {
 		lsp_zero.default_setup,
 		lua_ls = function()

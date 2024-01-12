@@ -37,22 +37,33 @@ require("lazy").setup({
 			--lsp support
 			{ "neovim/nvim-lspconfig" },
 			--mason stuff
-			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason.nvim", dependencies = {
+				"WhoIsSethDaniel/mason-tool-installer.nvim",
+			} },
 			{ "williamboman/mason-lspconfig.nvim" },
-			{ "jay-babu/mason-nvim-dap.nvim" },
 			--autocompletion
 			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-path" },
-			{ "hrsh7th/cmp-buffer" },
-			--snippets
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
+			{
+				"hrsh7th/nvim-cmp",
+				event = "InsertEnter",
+				dependencies = {
+					"hrsh7th/cmp-buffer", --source for text in buffer
+					"hrsh7th/cmp-path", --source for file system paths in commands
+					"saadparwaiz1/cmp_luasnip", -- for lua autocomp
+					--snippets
+					"L3MON4D3/LuaSnip", --snipet engine
+					"rafamadriz/friendly-snippets", --useful snippets library
+				},
+			},
 		},
 	},
 	-- file nav
 	--harpoon
-	{ "ThePrimeagen/harpoon" },
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 	--telescope
 	{
 		"nvim-telescope/telescope.nvim",
@@ -72,36 +83,27 @@ require("lazy").setup({
 		end,
 	},
 	-- git
-	{ "kdheepak/lazygit.nvim" },
+	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
 	{ "airblade/vim-gitgutter" },
 	-- dap
-	--[[
 	{
 		"mfussenegger/nvim-dap",
-		config = function(_, _)
-			require("configs.keymaps")
-		end,
+	},
+	{
+		"mfussenegger/nvim-dap-python",
+		event = "VeryLazy",
+		ft = "python",
 	},
 	{
 		"rcarriga/nvim-dap-ui",
 		event = "VeryLazy",
 		dependencies = "mfussenegger/nvim-dap",
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-			dapui.setup()
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
-			end
-			dap.listeners.after.event_terminated["dapui_config"] = function()
-				dapui.close()
-			end
-			dap.listeners.after.event_exited["dapui_config"] = function()
-				dapui.close()
-			end
-		end,
 	},
-    ]]
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		event = "VeryLazy",
+		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+	},
 	-- auto closing brackets
 	{
 		"windwp/nvim-autopairs",
@@ -124,89 +126,44 @@ require("lazy").setup({
 	{
 		"nvim-neorg/neorg",
 		build = ":Neorg sync-parsers",
+		ft = "norg", -- lazy load on filetype
+		cmd = "Neorg", -- lazy load on command, allows you to autocomplete :Neorg regardless of whether it's loaded yet
+		--  (you could also just remove both lazy loading things)
+		priority = 30, -- treesitter is on default priority of 50, neorg should load after it.
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("neorg").setup({
-				load = {
-					["core.defaults"] = {}, -- Loads default behaviour
-					["core.concealer"] = {}, -- Adds pretty icons to your documents
-					["core.integrations.treesitter"] = {},
-					["core.completion"] = {
-						config = {
-							engine = "nvim-cmp",
-						},
-					},
-					["core.dirman"] = { -- Manages Neorg workspaces
-						config = {
-							workspaces = {
-								notes = "~/Notes",
-								comp = "~/Notes/computerstuff",
-								long = "~/Notes/longterm",
-								proektna = "~/Notes/proektna",
-							},
-							default_workspace = "notes",
-						},
-					},
-				},
-			})
-		end,
 	},
 	--misc
 	{
 		--gentoo syntax
-		"gentoo/gentoo-syntax",
+		{ "gentoo/gentoo-syntax", event = "VeryLazy" },
 		--tmux windows switching
-		"christoomey/vim-tmux-navigator",
+		{ "christoomey/vim-tmux-navigator" },
 		--unto tree
-		"mbbill/undotree",
+		{ "mbbill/undotree" },
 		--preview color
-		"uga-rosa/ccc.nvim",
+		{ "uga-rosa/ccc.nvim", lazy = true },
 		--vim fugitive
-		"tpope/vim-fugitive",
+		{ "tpope/vim-fugitive", lazy = true },
+		--epic game
+		{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
+		-- epic game 2
+		{ "seandewar/nvimesweeper", event = "VeryLazy" },
 	},
 	-- md preview
 	{
-		"ellisonleao/glow.nvim",
-		config = true,
-		cmd = "Glow",
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		event = "VeryLazy",
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
 	},
 	-- formatting stuff
 	{
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		keys = {
-			{
-				-- Customize or remove this keymap to your liking
-				"<leader>f",
-				function()
-					require("conform").format({ async = true, lsp_fallback = true })
-				end,
-				mode = "",
-				desc = "Format buffer",
-			},
-		},
-		-- Everything in opts will be passed to setup()
-		opts = {
-			-- Define your formatters
-			formatters_by_ft = {
-				lua = { "stylua" },
-				-- example: javascript = { { "prettierd", "prettier" } },
-				javascript = { "prettier" },
-				html = { "prettier" },
-				css = { "prettier" },
-				cpp = { "clang_format" },
-				c = { "clang_format" },
-			},
-			-- Set up format-on-save
-			format_on_save = { async = false, timeout_ms = 500, lsp_fallback = true },
-			-- Customize formatters
-			formatters = {
-				shfmt = {
-					prepend_args = { "-i", "2" },
-				},
-			},
-		},
 		init = function()
 			-- If you want the formatexpr, here is the place to set it
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -219,26 +176,6 @@ require("lazy").setup({
 			"BufReadPre",
 			"BufNewFile",
 		},
-		config = function()
-			local lint = require("lint")
-			lint.linters_by_ft = {
-				javascript = { "eslint_d" },
-				cpp = { "cpplint" },
-				c = { "cpplint" },
-			}
-			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-			-- :h events to check for more event you can add
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-				group = lint_augroup,
-				callback = function()
-					lint.try_lint()
-				end,
-			})
-			vim.keymap.set("n", "<leader>l", function()
-				lint.try_lint()
-			end, { desc = "triggers linting for the current file" })
-		end,
 	},
 	-- terminal
 	{
