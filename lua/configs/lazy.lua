@@ -159,6 +159,11 @@ require("lazy").setup({
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
+	-- lualine
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	-- formatting stuff
 	{
 		"stevearc/conform.nvim",

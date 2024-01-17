@@ -70,3 +70,4 @@ dap.configurations.cpp = {
 		console = "integratedTerminal",
 	},
 }
+dap.configurations.c = dap.configurations.cpp

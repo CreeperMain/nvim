@@ -29,6 +29,7 @@ require("mason-tool-installer").setup({
 		"stylelint",
 		"selene",
 		"biome",
+		"oxlint",
 		--lsps
 		--html
 		"html",
