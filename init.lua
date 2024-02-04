@@ -5,4 +5,6 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.loader.enable()
 
-require("configs")
+require("configs.options")
+require("configs.keymaps")
+require("configs.lazy")

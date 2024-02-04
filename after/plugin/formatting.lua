@@ -1,3 +1,4 @@
+--CONFORM.NVIM
 local conform = require("conform")
 
 conform.setup({
@@ -6,10 +7,12 @@ conform.setup({
 		css = { "prettier" },
 		cpp = { "clang_format" },
 		c = { "clang_format" },
+		cs = { "clang_format" },
 		html = { "prettier" },
 		javascript = { "prettier", "prettierd" },
 		lua = { "stylua" },
 		python = { "black" },
+		json = { "biome" },
 	},
 	-- Set up format-on-save
 	format_on_save = { async = false, timeout_ms = 500, lsp_fallback = true },
@@ -23,6 +26,6 @@ conform.setup({
 })
 vim.keymap.set("n", "<leader>f", function()
 	require("conform").format({ async = true, lsp_fallback = true })
-end)
+end, { desc = "format a file (configure the file extension if it doesnt format)" })
 -- mode = "",
 -- desc = "Format buffer",

@@ -24,6 +24,7 @@ require("lazy").setup({
 	-- tree sitter bit
 	{
 		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
 		build = ":TSUpdate",
 	},
 	{
@@ -49,6 +50,7 @@ require("lazy").setup({
 				dependencies = {
 					"hrsh7th/cmp-buffer", --source for text in buffer
 					"hrsh7th/cmp-path", --source for file system paths in commands
+					"hrsh7th/cmp-cmdline",
 					"saadparwaiz1/cmp_luasnip", -- for lua autocomp
 					--snippets
 					"L3MON4D3/LuaSnip", --snipet engine
@@ -84,7 +86,7 @@ require("lazy").setup({
 	},
 	-- git
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
-	{ "airblade/vim-gitgutter" },
+	{ "lewis6991/gitsigns.nvim" },
 	-- dap
 	{
 		"mfussenegger/nvim-dap",
@@ -143,13 +145,13 @@ require("lazy").setup({
 		--preview color
 		{ "uga-rosa/ccc.nvim", lazy = true },
 		--vim fugitive
-		{ "tpope/vim-fugitive", lazy = true },
+		-- { "tpope/vim-fugitive", lazy = true },
 		--epic game
 		{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
 		-- epic game 2
 		{ "seandewar/nvimesweeper", event = "VeryLazy" },
 	},
-	-- md preview
+	-- writer related i.e. youtube script writing
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -158,6 +160,17 @@ require("lazy").setup({
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
+	},
+	{
+		"folke/zen-mode.nvim",
+		opts = {},
+	},
+	{
+		"folke/twilight.nvim",
+		opts = {},
+	},
+	{
+		"preservim/vim-pencil",
 	},
 	-- lualine
 	{
@@ -185,5 +198,53 @@ require("lazy").setup({
 	-- terminal
 	{
 		{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	},
+	-- dashboard
+	{
+		"nvimdev/dashboard-nvim",
+		event = "VimEnter",
+		dependencies = { { "nvim-tree/nvim-web-devicons" } },
+	},
+	-- ui plugin
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	-- nvim-ufo aka folds
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+	},
+	-- noice.nvim
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
+	},
+	-- notify
+	{ "rcarriga/nvim-notify" },
+	-- which-key
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
 	},
 })

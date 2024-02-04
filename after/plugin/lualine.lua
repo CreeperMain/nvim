@@ -1,13 +1,3 @@
---[[
-local DevIcons = require("nvim-web-devicons")
-DevIcons.set_icon({
-	lua = {
-		icon = "󰢱",
-		color = "#a9b1d6",
-		name = "lua",
-	},
-})
-]]
 require("lualine").setup({
 	options = {
 		icons_enabled = true,

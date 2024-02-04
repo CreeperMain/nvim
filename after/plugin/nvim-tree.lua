@@ -96,7 +96,7 @@ tree.setup({
 		},
 	},
 })
-
+-- this bit under closes nvim-tree when you close the buffer, it doesnt work rn cuz of nvim-noice
 vim.api.nvim_create_autocmd("QuitPre", {
 	callback = function()
 		local invalid_win = {}

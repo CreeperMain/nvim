@@ -1,4 +1,4 @@
--- this scares me
+-- LSP-ZERO CONFIG
 local lsp_zero = require("lsp-zero")
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -9,35 +9,39 @@ lsp_zero.on_attach(function(client, bufnr)
 	end, opts)
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
-	end, opts)
+	end, opts, { desc = "hover over an element explaining it" })
 	vim.keymap.set("n", "<leader>vws", function()
 		vim.lsp.buf.workspace_symbol()
 	end, opts)
 	vim.keymap.set("n", "<leader>vd", function()
 		vim.diagnostic.open_float()
-	end, opts)
+	end, { desc = "open up floating window of errors on line" })
 	vim.keymap.set("n", "[d", function()
 		vim.diagnostic.goto_next()
-	end, opts)
+	end, { desc = "go to the next diagnostic" })
 	vim.keymap.set("n", "]d", function()
 		vim.diagnostic.goto_prev()
-	end, opts)
+	end, { desc = "go the last diagnostic" })
 	vim.keymap.set("n", "<leader>vca", function()
 		vim.lsp.buf.code_action()
 	end, opts)
 	vim.keymap.set("n", "<leader>vrr", function()
 		vim.lsp.buf.references()
-	end, opts) -- this is pretty cool ngl
+	end, { desc = "finds references" })
 	vim.keymap.set("n", "<leader>rn", function()
 		vim.lsp.buf.rename()
-	end, opts)
-	vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {}) -- use this to find references of functions
+	end, { desc = "rename, useful for html tags" })
+	vim.keymap.set("n", "fr", require("telescope.builtin").lsp_references, { desc = "find references of functions" }) -- use this to find references of functions
 	vim.keymap.set("i", "<C-h>", function()
 		vim.lsp.buf.signature_help()
-	end, opts)
+	end, { desc = "signature help while in insert" })
 end)
 
+--MASON
 require("mason").setup({})
+-- vaka trebit inache javuvat greshka ^
+
+-- MASON-LSPCONFIG
 require("mason-lspconfig").setup({
 	handlers = {
 		lsp_zero.default_setup,
@@ -47,7 +51,18 @@ require("mason-lspconfig").setup({
 		end,
 	},
 })
+-- LSPCONFIG
+local lspconfig = require("lspconfig")
+lspconfig.tailwindcss.setup({
+	single_file_support = true,
+})
+lspconfig.eslint.setup({
+	single_file_support = true,
+})
+-- this is the only way to circumnavigate an issue (the lsps dont load)
+-- this is also where you configure lsps indvididually
 
+-- NEOVIM CMP
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 

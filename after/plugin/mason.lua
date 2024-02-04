@@ -30,11 +30,14 @@ require("mason-tool-installer").setup({
 		"selene",
 		"biome",
 		"oxlint",
+		"shellcheck",
 		--lsps
+		--bash
+		"bashls",
 		--html
 		"html",
 		"emmet_language_server",
-		"emmet_ls",
+		--"emmet_ls",
 		--css
 		"cssls",
 		"tailwindcss",
@@ -48,6 +51,8 @@ require("mason-tool-installer").setup({
 		"clangd",
 		-- python
 		"pyright",
+		-- markdown
+		"marksman",
 		--formatters
 		"clang-format",
 		"stylua",
