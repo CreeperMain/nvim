@@ -199,12 +199,6 @@ require("lazy").setup({
 	{
 		{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	},
-	-- dashboard
-	{
-		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
-		dependencies = { { "nvim-tree/nvim-web-devicons" } },
-	},
 	-- ui plugin
 	{
 		"stevearc/dressing.nvim",

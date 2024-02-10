@@ -22,14 +22,15 @@ require("mason-tool-installer").setup({
 		"cpptools",
 		--linters
 		"cpplint",
-		"eslint_d",
+		--"eslint_d",
 		"pylint",
 		"black",
 		"htmlhint",
 		"stylelint",
 		"selene",
-		"biome",
-		"oxlint",
+		--"biome",
+		--"oxlint",
+		"quick_lint_js",
 		"shellcheck",
 		--lsps
 		--bash
@@ -43,8 +44,10 @@ require("mason-tool-installer").setup({
 		"tailwindcss",
 		-- javascript
 		"tsserver",
-		"eslint",
+		"volar",
+		--"eslint",
 		"vtsls",
+		"biome",
 		-- lua
 		"lua_ls",
 		-- cpp

@@ -1,11 +1,12 @@
 local lint = require("lint")
+
 lint.linters_by_ft = {
 	cpp = { "cpplint" },
 	c = { "cpplint" },
-	javascript = { "oxlint" },
-	typescript = { "eslint_d" },
-	javascriptreact = { "eslint_d" },
-	typescriptreact = { "eslint_d" },
+	javascript = { "quick-lint-js" },
+	typescript = { "quick_lint_js" },
+	javascriptreact = { "quick_lint_js" },
+	typescriptreact = { "quick_lint_js" },
 	svelte = { "eslint_d" },
 	--html = { "eslint_d" },
 	python = { "pylint" },
@@ -13,6 +14,7 @@ lint.linters_by_ft = {
 	lua = { "selene" },
 	bash = { "shellcheck" },
 }
+
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
 -- :h events to check for more event you can add

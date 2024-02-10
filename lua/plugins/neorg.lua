@@ -16,7 +16,7 @@ require("neorg").setup({
 					long = "~/Notes/longterm",
 					proektna = "~/Notes/proektna",
 					youtube = "~/Notes/youtube-notes",
-					game_proj = "~/Notes/game-notes",
+					game_dev = "~/Notes/game-notes",
 				},
 				default_workspace = "notes",
 			},

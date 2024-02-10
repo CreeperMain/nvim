@@ -49,27 +49,16 @@ dap.adapters.codelldb = {
 		args = { "--port", "${port}" },
 	},
 }
---[[
-dap.adapters.rustlldb = {
-	type = "server",
-	port = "${port}",
-	host = "127.0.0.1",
-	executable = {
-		command = "/home/martin/.local/share/nvim/mason/bin/codelldb",
-		args = { "--liblldb", liblldb_path, "--port", "${port}" },
-	},
-}
-maybe this will come in useful
 dap.adapters["pwa-node"] = {
 	type = "server",
 	host = "127.0.0.1",
-	port = "${port}",
+	--port = "${port}",
+	port = "8123",
 	executable = {
 		command = "/home/martin/.local/share/nvim/mason/bin/js-debug-adapter",
-		args = { "${port}" },
+		--args = { "${port}" },
 	},
 }
-]]
 -- configuring it for file types
 dap.configurations.cpp = {
 	{
@@ -88,5 +77,15 @@ dap.configurations.cpp = {
 }
 dap.configurations.c = dap.configurations.cpp
 
---local mason_registry = require("mason-registry")
---local vscode_js_debug_dap = mason_registry.get_package("js-debug-adapter")
+for _, language in ipairs({ "typescript", "javascript" }) do
+	dap.configurations[language] = {
+		{
+			type = "pwa-node",
+			request = "launch",
+			name = "Launch file",
+			program = "${file}",
+			cwd = "${workspaceFolder}",
+			runtimeExecutable = "node",
+		},
+	}
+end
