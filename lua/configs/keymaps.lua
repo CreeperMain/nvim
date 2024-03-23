@@ -37,7 +37,8 @@ vim.keymap.set("t", "<C-c>", "<C-\\><C-n><C-w>h", { silent = true })
 -- opening up windows
 vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "Splits the window horizontally" })
 vim.keymap.set("n", "<leader>\\", "<cmd>vsplit<CR>", { desc = "Splits the window vertically" })
+-- yanking to sys clipboard
+
 -- spellcheck
 vim.keymap.set("i", "<C-s>", "<Esc>[s1z=`]a", { desc = "Spell check & correct" })
 vim.keymap.set("n", "<C-s>", "<Esc>[s1z=`]a", { desc = "Spell check & correct" })
--- to enter write mode ZenMode | Pencil & set spell

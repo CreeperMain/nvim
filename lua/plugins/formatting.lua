@@ -10,6 +10,7 @@ conform.setup({
 		cs = { "clang_format" },
 		html = { "prettier" },
 		javascript = { "prettier", "prettierd" },
+		markdown = { "prettier", "prettierd" },
 		lua = { "stylua" },
 		python = { "black" },
 		json = { "biome" },

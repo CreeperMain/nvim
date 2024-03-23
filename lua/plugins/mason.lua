@@ -56,6 +56,8 @@ require("mason-tool-installer").setup({
 		"pyright",
 		-- markdown
 		"marksman",
+		-- php
+		"intelephense",
 		--formatters
 		"clang-format",
 		"stylua",

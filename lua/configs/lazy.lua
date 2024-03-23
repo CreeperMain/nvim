@@ -59,6 +59,10 @@ require("lazy").setup({
 			},
 		},
 	},
+	--inline-edit
+	{
+		"AndrewRadev/inline_edit.vim",
+	},
 	-- file nav
 	--harpoon
 	{
@@ -124,16 +128,6 @@ require("lazy").setup({
 	},
 	-- blankline indentation
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-	-- neorg
-	{
-		"nvim-neorg/neorg",
-		build = ":Neorg sync-parsers",
-		ft = "norg", -- lazy load on filetype
-		cmd = "Neorg", -- lazy load on command, allows you to autocomplete :Neorg regardless of whether it's loaded yet
-		--  (you could also just remove both lazy loading things)
-		priority = 30, -- treesitter is on default priority of 50, neorg should load after it.
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
 	--misc
 	{
 		--gentoo syntax
@@ -240,5 +234,10 @@ require("lazy").setup({
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		},
+	},
+	-- ts autotag
+	{
+		"windwp/nvim-ts-autotag",
+		ft = "html",
 	},
 })
