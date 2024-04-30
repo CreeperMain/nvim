@@ -16,10 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- color scheme
 	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
+		"phha/zenburn.nvim",
 	},
 	-- tree sitter bit
 	{
@@ -103,7 +100,7 @@ require("lazy").setup({
 	{
 		"rcarriga/nvim-dap-ui",
 		event = "VeryLazy",
-		dependencies = "mfussenegger/nvim-dap",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
@@ -126,8 +123,11 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- blankline indentation
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	-- indentation
+	{
+		"shellRaining/hlchunk.nvim",
+		event = { "UIEnter" },
+	},
 	--misc
 	{
 		--gentoo syntax
@@ -155,12 +155,17 @@ require("lazy").setup({
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
+	--write ur scripts in markdown or txt
 	{
 		"folke/zen-mode.nvim",
+		ft = { "markdown", "txt" },
+		event = "VeryLazy",
 		opts = {},
 	},
 	{
 		"folke/twilight.nvim",
+		ft = { "markdown", "txt" },
+		event = "VeryLazy",
 		opts = {},
 	},
 	{
@@ -240,4 +245,10 @@ require("lazy").setup({
 		"windwp/nvim-ts-autotag",
 		ft = "html",
 	},
+	-- rich discord pressence
+	{
+		"andweeb/presence.nvim",
+	},
+	-- take screenshots of code
+	{ "mistricky/codesnap.nvim", lazy = true, build = "make", cmd = "CodeSnapPreviewOn" },
 })

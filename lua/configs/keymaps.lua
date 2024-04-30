@@ -15,7 +15,7 @@ vim.keymap.set("i", "jj", "<Esc>", { desc = "Exits insert mode" })
 
 -- pasting related
 vim.keymap.set("x", "<leader>p", '"_dP')
-
+---- these paste it into linux's clipboard
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
@@ -28,7 +28,7 @@ vim.keymap.set("n", "<C-c>", "<Esc>", { desc = "exits terminal mode" })
 vim.keymap.set(
 	"n",
 	"<leader>s",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], --replace capital I with c for confirmation it asks you na sekoe
 	{ desc = "renames all the words" }
 ) --look into this very cool and i mean an idividual version
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) --makes a file executable, look at chmod

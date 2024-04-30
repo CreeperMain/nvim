@@ -10,17 +10,8 @@ ccc.setup({
 		lsp = true,
 	},
 })
--- TOKYONIGHT.NVIM COLORSCHEME
-require("tokyonight").setup({
-	terminal_colors = true,
-	--[[
-	styles = {
-		comments = { italic = true },
-		keywords = { italic = true },
-	},
-    ]]
-})
-vim.cmd([[colorscheme tokyonight-night]])
+-- COLORSCHEME
+require("zenburn").setup()
 -- NVIM-UFO aka folds
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99
@@ -41,8 +32,24 @@ require("ufo").setup({
 		return { "lsp", "indent" }
 	end,
 })
---INDENT-BLANKLINE
-require("ibl").setup({})
+--INDENTATION
+require("hlchunk").setup({
+	chunk = {
+		enable = true,
+		style = {
+			{ fg = "#cfbfaf" },
+			{ fg = "#cc9393" }, -- this fg is used to highlight wrong chunk
+		},
+	},
+	line_num = {
+		enable = false,
+	},
+	indent = {
+		use_treesitter = true,
+		chars = { "│", "¦", "┆", "┊" }, -- more code can be found in https://unicodeplus.com/
+	},
+})
+
 -- WRITER MODE
 require("zen-mode").setup({
 	window = {
