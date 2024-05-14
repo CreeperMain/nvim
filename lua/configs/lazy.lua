@@ -16,7 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- color scheme
 	{
-		"phha/zenburn.nvim",
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
 	},
 	-- tree sitter bit
 	{

@@ -11,7 +11,16 @@ ccc.setup({
 	},
 })
 -- COLORSCHEME
-require("zenburn").setup()
+require("tokyonight").setup({
+	terminal_colors = true,
+	--[[
+	styles = {
+		comments = { italic = true },
+		keywords = { italic = true },
+	},
+    ]]
+})
+vim.cmd([[colorscheme tokyonight-night]])
 -- NVIM-UFO aka folds
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99

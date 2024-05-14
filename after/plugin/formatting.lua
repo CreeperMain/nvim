@@ -16,7 +16,7 @@ conform.setup({
 		json = { "biome" },
 	},
 	-- Set up format-on-save
-	format_on_save = { async = false, timeout_ms = 500, lsp_fallback = true },
+		format_on_save = { async = false, timeout_ms = 500, lsp_fallback = true },
 	-- i have no idea what this does but i'll keep it here
 	-- Customize formatters
 	formatters = {
