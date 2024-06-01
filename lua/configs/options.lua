@@ -24,6 +24,7 @@ local options = {
 	termguicolors = true,
 
 	scrolloff = 8,
+	conceallevel = 0,
 
 	updatetime = 50,
 

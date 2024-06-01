@@ -249,9 +249,63 @@ require("lazy").setup({
 		ft = "html",
 	},
 	-- rich discord pressence
+	--[[
 	{
 		"andweeb/presence.nvim",
 	},
+    ]]
 	-- take screenshots of code
 	{ "mistricky/codesnap.nvim", lazy = true, build = "make", cmd = "CodeSnapPreviewOn" },
+	-- obsidian.nvim for note taking
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*", -- recommended, use latest release instead of latest commit
+		lazy = true,
+		event = {
+			"BufReadPre " .. vim.fn.expand("~") .. "/Notes/**.md",
+			"BufNewFile " .. vim.fn.expand("~") .. "/Notes/**.md",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "my vault",
+					path = "~/Notes/",
+				},
+			},
+			note_id_func = function(title)
+				local suffix = ""
+				if title ~= nil then
+					-- If title is given, transform it into valid file name.
+					suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+				else
+					-- If title is nil, just add 4 random uppercase letters to the suffix.
+					for _ = 1, 4 do
+						suffix = tostring(os.time()) .. "-" .. string.char(math.random(65, 90))
+					end
+				end
+				return suffix
+			end,
+			disable_frontmatter = true,
+			ui = {
+				enable = false, -- set to false to disable all additional syntax features
+				update_debounce = 200, -- update delay after a text change (in milliseconds)
+				-- Define how various check-boxes are displayed
+				checkboxes = {
+					-- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
+					[" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+					["x"] = { char = "", hl_group = "ObsidianDone" },
+					[">"] = { char = "", hl_group = "ObsidianRightArrow" },
+					["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+					-- Replace the above with this if you don't have a patched font:
+					-- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
+					-- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
+
+					-- You can also add more custom ones...
+				},
+			},
+		},
+	},
 })
